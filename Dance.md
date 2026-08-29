@@ -1,3 +1,9 @@
+---
+title: List of Dance Styles
+---
+
+## Dance Styles and Songs  
+
 | Dance Style | Tutorial & Practice Links | Pri & Alt Songs |
 | :--- | :--- | :--- |
 | **Electric Slide** | • [Step-by-Step Tutorial](https://example.com/electric-slide-tutorial)<br>• [Practice Video](https://example.com/electric-slide-practice) | **Pri:** [<span style="color:inherit;">Electric Boogie</span>](https://www.youtube.com/results?search_query=Electric+Boogie){:target="_blank"}<br>**Alt:** [<span style="color:inherit;">Canned Heat</span>](https://www.youtube.com/results?search_query=Canned+Heat){:target="_blank"}, [<span style="color:inherit;">Treasure</span>](https://www.youtube.com/results?search_query=Treasure){:target="_blank"} |
