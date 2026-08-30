@@ -3,13 +3,12 @@ title: " "
 ---
 #### kc set file name to index.md  and hack code to show font color
 
-<center>Dance Styles and Songs  center</center>
+Dance Styles and Songs  center
+<font color="red">This text is red!</font><br>
 
-<font color="red">This text is red!</font>
+<font color="blue">This text is blue!</font>  <br>
 
-<font color="blue">This text is blue!</font>
-
-<font color="green">This text is green!</font>
+<font color="green">This text is green!</font><br>
 
 > :warning: **Warning:** Do not push the big red button.
 
@@ -22,7 +21,7 @@ title: " "
 
 — &copy;
 
-Water boil at 100— &#176;C
+Water boil at 100&#176;C
 
 — &#960;
 
