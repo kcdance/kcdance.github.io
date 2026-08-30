@@ -1,6 +1,32 @@
-#### kc set file name to index.md  
+---
+title: " "
+---
+#### kc set file name to index.md  and hack code to show font color
 
-Dance Styles and Songs  
+<center>Dance Styles and Songs  center</center>
+
+<font color="red">This text is red!</font>
+
+<font color="blue">This text is blue!</font>
+
+<font color="green">This text is green!</font>
+
+> :warning: **Warning:** Do not push the big red button.
+
+> :memo: **Note:** Sunrises are beautiful.
+
+> :bulb: **Tip:** Remember to appreciate the little things in life.
+
+
+<a href="https://www.news.google.com" target="_blank">open Google on new tab</a>
+
+— &copy;
+
+Water boil at 100— &#176;C
+
+— &#960;
+
+
 
 This is a test for paragraph
 
