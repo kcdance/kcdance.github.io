@@ -22,9 +22,7 @@ Water boil at 100&#176;C
 — &#960; &copy; &reg;  Lego&trade;  Lenovo&reg; is a Register Trademark.  
 
 &larr;  &uarr;  &rarr;  &darr;  
-
-
-— &excl;  &PlusMinus;  &half;  &frac14;  &frac13;   &frac23;  &frac15;   &frac38;  &incare;  &complexes;  &Zopf;  
+&excl;  &PlusMinus;  &half;  &frac14;  &frac13;  &frac23;  &frac15;   &frac38;  &incare;  &complexes;  &Zopf;  
 
   
 — &Cfr;  &Mscr;   &uarr;   
