@@ -13,7 +13,7 @@ See the index file under LD folder
 > :bulb: **Tip:** Remember to appreciate the little things in life.
 
 
-<a href="https://www.finance.google.com" target="_blank">open Google finance on new tab</a>
+<a href="https://www.google.com/finance/beta" target="_blank">open Google finance on new tab</a>
 
 — &copy;
 
