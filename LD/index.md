@@ -24,9 +24,10 @@ Water boil at 100&#176;C
 &larr;  &uarr;  &rarr;  &darr;  
 
 
-&excl;  &PlusMinus;  &half;  &frac14;  &frac13;   &frac23;  &frac15;   &frac38; &incare;  &complexes;  &Zopf;  
+— &excl;  &PlusMinus;  &half;  &frac14;  &frac13;   &frac23;  &frac15;   &frac38;  &incare;  &complexes;  &Zopf;  
 
-&Cfr;  &Mscr;  
+  
+— &Cfr;  &Mscr;   &uarr;   
 
 for more look here 
 
