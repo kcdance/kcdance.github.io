@@ -22,12 +22,26 @@ Water boil at 100&#176;C
 — &#960; &copy; &reg;  Lego&trade;  Lenovo&reg; is a Register Trademark.  
 
 &larr;  &uarr;  &rarr;  &darr;  
+
 &excl;  &PlusMinus;  &half;  &frac14;  &frac13;  &frac23;  &frac15;   &frac38;  &incare;  &complexes;  &Zopf;  
 
   
 — &Cfr;  &Mscr;   &uarr;   
 
-for more look here 
+Many of the above errors are because of the Invalid or Unsupported Named Entities (Fail to Render) problem.   
+Do not use non-standard, obscure HTML5 additions, or unsupported by simpler Markdown-to-HTML converters.
+
+below is the alternative way to get it rendered properly
+
+&pi; or &#960;  use two ways to display  pi
+
+  &#8525;  &#8526;  &#8527;  &#8528;  &#8529; &#8530;  &#8531;  &#8532;  &#8533;  &#8534;  &#8535;  &#8536;  &#8537;  &#8538;  &#8539;  
+
+  &#8453;  &#8450;  &#8484;  &#8460;  
+
+Pro Tip: Modern Markdown engine parsers fully support UTF-8 encoded text.  
+
+For more look here 
 
 <a href="https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references" target="_blank">List of XML and HTML character entity references</a>
 
