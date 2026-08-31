@@ -21,7 +21,7 @@ Water boil at 100&#176;C
 
 — &#960; &copy; &reg;  Lego&trade;  Lenovo&reg; is a Register Trademark.  
 
-&larr;  &uarr;  &rarr;  &darr;  
+&larr;  &uarr;  &rarr;  &darr;  &dzigrarr;
 
 &excl;  &PlusMinus;  &half;  &frac14;  &frac13;  &frac23;  &frac15;   &frac38;  &incare;  &complexes;  &Zopf;  
 
@@ -35,9 +35,15 @@ below is the alternative way to get it rendered properly
 
 &pi; or &#960;  use two ways to display  pi
 
-  &#8525;  &#8526;  &#8527;  &#8528;  &#8529; &#8530;  &#8531;  &#8532;  &#8533;  &#8534;  &#8535;  &#8536;  &#8537;  &#8538;  &#8539;  
+  &#8525;  &#8526;  &#8527;  &#8528;  &#8529; &#8530;  &#8531;  &#8532;  &#8533;  &#8534;  &#8535;  &#8536;  &#8537;  &#8538;  &#8539;  &sung;  
 
-  &#8453;  &#8450;  &#8484;  &#8460;  
+  &#8453;  &#8450;  &#8484;  &#8460;  &flat;  &natural;  &sharp;  &checkmark;  &cross;  &maltese;  &sext;  
+
+  &olcir;  &ofcir;  &boxbox;  &bigoplus;  
+
+  &Ascr;  &Cscr;  &Dscr;  &Gscr;  &Jscr;  &Kscr;  &Nscr;  &Oscr;  &Pscr;  &Qscr;  &Sscr;  &Tscr;  &Uscr;  
+  
+  &Vscr;  &Wscr;   &Xscr;  &Yscr;  &Zscr;
 
 Pro Tip: Modern Markdown engine parsers fully support UTF-8 encoded text.  
 
@@ -45,6 +51,28 @@ For more look here
 
 <a href="https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references" target="_blank">List of XML and HTML character entity references</a>
 
+How to add Emojis to webpage  
+  Copy and Paste  
+  or Windows + period or semicolon  will get emoji picker  
+  
+  or Using HTML Entities  
+     make sure you have this     <span style="color: red;">&lt;meta charset="UTF-8"&gt;</span> [tricky to display HTML tag inside a webpage need to do something to lessthan and greater than sign]
+
+To display raw HTML tags as text on a web page, you must convert the angle brackets (< and >) into HTML entities (&amp;lt; and &amp;gt;). Otherwise, the browser interprets them as functional HTML tags instead of text.
+
+
+NOTE: To display HTML entity codes as visible literal text (rather than having the browser render them as characters or run them as code), <span style="color: red;">you must escape the ampersand (&)</span> by replacing it with &amp;amp.
+
+Sample:    
+
+ |Desire Text display   |               HTML code   |
+ | :------------------- | :------------------------ | 
+ |&amp;copy;            |            &amp;amp;copy; |
+ |&amp;reg ;            |            &amp;amp;reg;  |
+ |&amp;trade;           |           &amp;amp;trade; |
+ |&amp;lt;              |              &amp;amp;lt; |
+ |&amp;gt;            |                &amp;amp;gt; |
+ |&amp;amp;            |              &amp;amp;amp; |
 
 This is a test for paragraph
 
