@@ -41,6 +41,9 @@ below is the alternative way to get it rendered properly
 
   &olcir;  &ofcir;  &boxbox;  &bigoplus;  
 
+  STILL HAVE A LOT OF UNSUPPORT HTML Entities below   
+  MIght as well just find the special char on web and copy and paste it (mose modern support direct support these char nowaday)
+
   &Ascr;  &Cscr;  &Dscr;  &Gscr;  &Jscr;  &Kscr;  &Nscr;  &Oscr;  &Pscr;  &Qscr;  &Sscr;  &Tscr;  &Uscr;  
   
   &Vscr;  &Wscr;   &Xscr;  &Yscr;  &Zscr;
