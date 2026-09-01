@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dance Style Library</title>
+  <style>
+    :root {
+      /* User Custom Color Palette */
+      --color-coral: #FCA47C;
+      --color-teal: #23CED9;
+      --color-gold: #F9D779;
+      --color-dark-teal: #097C87;
+
+      /* UI Application Colors */
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --kc-bg-color: #ddebfb;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: #e2e8f0;
+      --shadow-soft: 0 10px 25px rgba(9, 124, 135, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 1.5rem 1rem;
+      background-color: var(--card-bg);
+      border-bottom: 3px solid var(--color-teal);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--color-dark-teal);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* Search Container with Clear Button */
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 0.75rem 2.5rem 0.75rem 1rem;
+      border-radius: 15px;
+      border: 2px solid var(--color-teal);
+      background-color: #ffffff;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-box:focus {
+      border-color: var(--color-dark-teal);
+      box-shadow: 0 0 0 3px rgba(35, 206, 217, 0.25);
+    }
+
+    .clear-btn {
+      position: absolute;
+      right: 0.85rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: none;
+      line-height: 1;
+    }
+
+    .clear-btn:hover {
+      color: var(--color-dark-teal);
+    }
+
+    /* Main Container Grid Layout */
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 1rem;
+      flex: 1;
+    }
+
+    /* Desktop View: 2 Columns side-by-side */
+    @media (min-width: 768px) {
+      .container {
+        grid-template-columns: 280px 1fr;
+        padding: 2rem;
+      }
+    }
+
+    .panel {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-soft);
+      padding: 1.25rem;
+      overflow-y: auto;
+    }
+
+    .panel h2 {
+      font-size: 0.90rem;
+      font-weight: 600;
+      color: var(--color-dark-teal);
+      margin-bottom: 1rem;
+      border-bottom: 2px dashed var(--color-gold);
+      padding-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .panel-right {
+      background-color: var(--kc-bg-color);
+    }
+
+    /* Left Panel: Style List */
+    .style-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .style-item {
+      padding: 0.25rem 0.25rem;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #f8fafc;
+      color: var(--text-main);
+      font-weight: 600;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .style-item:hover {
+      background-color: rgba(249, 215, 121, 0.3);
+      color: var(--color-dark-teal);
+    }
+
+    .style-item.active {
+      background-color: var(--color-gold);
+      color: var(--color-dark-teal);
+      border-color: var(--color-coral);
+      font-weight: 700;
+    }
+
+    /* Right Panel: Content Table */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--color-dark-teal);
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .dance-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .dance-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-dark-teal);
+    }
+
+    .dance-links a {
+      color: #0f172a;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: inline-block;
+      margin-right: 0.6rem;
+      padding: 0.25rem 0.65rem;
+      background-color: var(--color-coral);
+      border-radius: 6px;
+      transition: opacity 0.2s ease;
+    }
+
+    .dance-links a:hover {
+      opacity: 0.85;
+    }
+
+    .song-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .song-list a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0.5rem;
+      border-radius: 6px;
+      transition: background 0.2s ease;
+    }
+
+    .song-list a:hover {
+      background-color: rgba(35, 206, 217, 0.15);
+      color: var(--color-dark-teal);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Dance Style Hub</h1>
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" class="search-box" placeholder="Search dance styles..." oninput="filterStyles()" />
+      <button id="clearBtn" class="clear-btn" onclick="clearSearch()" aria-label="Clear search">&times;</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Left Panel: Searchable List -->
+    <div class="panel">
+      <h2>Dance Styles</h2>
+      <ul class="style-list" id="styleList">
+        <li class="style-item active" onclick="showStyle('salsa', this)">Salsa</li>
+        <li class="style-item" onclick="showStyle('hiphop', this)">Hip Hop</li>
+        <li class="style-item" onclick="showStyle('tango', this)">Argentine Tango</li>
+        <li class="style-item" onclick="showStyle('bachata', this)">Bachata</li>
+        <li class="style-item" onclick="showStyle('electricslide', this)">Electric Slide</li>
+        <li class="style-item" onclick="showStyle('chillychacha', this)">Chilly Cha Cha</li>
+        <li class="style-item" onclick="showStyle('tushpush', this)">Tush Push</li>
+        <li class="style-item" onclick="showStyle('honkytonkstomp', this)">Honky Tonk Stomp</li>
+        <li class="style-item" onclick="showStyle('cherrychacha', this)">Cherry Cha Cha</li>
+        <li class="style-item" onclick="showStyle('jerusalema', this)">Jerusalema</li>
+      </ul>
+    </div>
+
+    <!-- Right Panel: Information & Songs Table -->
+    <div class="panel panel-right"> 
+      <h2>Tutorials & Music</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 45%;">Style & Tutorials</th>
+              <th style="width: 55%;">Recommended Songs</th>
+            </tr>
+          </thead>
+          <tbody id="danceTableBody">
+            <!-- Dynamic Content loaded via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const danceData = {
+      salsa: {
+        name: "Salsa",
+        tutorials: [
+          { label: "Basic Steps Tutorial", url: "https://www.youtube.com/results?search_query=salsa+basic+step+tutorial" },
+          { label: "Partner Work Practice", url: "https://www.youtube.com/results?search_query=salsa+partnerwork+practice" }
+        ],
+        songs: [
+          { title: "Llorarás - Oscar D'León", url: "https://www.youtube.com/results?search_query=Lloraras+Oscar+DLeón" },
+          { title: "Valió la Pena - Marc Anthony", url: "https://www.youtube.com/results?search_query=Valio+la+Pena+Marc+Anthony" }
+        ]
+      },
+      hiphop: {
+        name: "Hip Hop",
+        tutorials: [
+          { label: "Beginner Bounce & Groove", url: "https://www.youtube.com/results?search_query=hip+hop+groove+tutorial" },
+          { label: "Footwork Drill Practice", url: "https://www.youtube.com/results?search_query=hip+hop+footwork+drills" }
+        ],
+        songs: [
+          { title: "Lose Control - Missy Elliott", url: "https://www.youtube.com/results?search_query=Lose+Control+Missy+Elliott" },
+          { title: "HUMBLE. - Kendrick Lamar", url: "https://www.youtube.com/results?search_query=HUMBLE+Kendrick+Lamar" }
+        ]
+      },
+      tango: {
+        name: "Argentine Tango",
+        tutorials: [
+          { label: "Walk & Posture Basics", url: "https://www.youtube.com/results?search_query=argentine+tango+basic+walk" },
+          { label: "Ocho Practice Guide", url: "https://www.youtube.com/results?search_query=tango+ocho+tutorial" }
+        ],
+        songs: [
+          { title: "Por Una Cabeza - Carlos Gardel", url: "https://www.youtube.com/results?search_query=Por+Una+Cabeza+Carlos+Gardel" },
+          { title: "La Cumparsita - Juan D'Arienzo", url: "https://www.youtube.com/results?search_query=La+Cumparsita+Juan+DArienzo" }
+        ]
+      },
+      bachata: {
+        name: "Bachata",
+        tutorials: [
+          { label: "Basic 8-Count Step", url: "https://www.youtube.com/results?search_query=bachata+basic+step" },
+          { label: "Sensual Hip Movement Drill", url: "https://www.youtube.com/results?search_query=bachata+hip+movement" }
+        ],
+        songs: [
+          { title: "Obsesión - Aventura", url: "https://www.youtube.com/results?search_query=Obsesion+Aventura" },
+          { title: "Propuesta Indecente - Romeo Santos", url: "https://www.youtube.com/results?search_query=Propuesta+Indecente+Romeo+Santos" }
+        ]
+      },
+      electricslide: {
+        name: "Electric Slide",
+        tutorials: [
+          { label: "Line Dance Tutorial", url: "https://www.youtube.com/results?search_query=electric+slide+line+dance+tutorial" },
+          { label: "Step-by-Step Practice", url: "https://www.youtube.com/results?search_query=electric+slide+practice+steps" }
+        ],
+        songs: [
+          { title: "Electric Boogie - Marcia Griffiths", url: "https://www.youtube.com/results?search_query=Electric+Boogie+Marcia+Griffiths" }
+        ]
+      },
+      chillychacha: {
+        name: "Chilly Cha Cha",
+        tutorials: [
+          { label: "Chilly Cha Cha Line Dance", url: "https://www.youtube.com/results?search_query=chilly+cha+cha+line+dance+tutorial" },
+          { label: "Dance Practice Clip", url: "https://www.youtube.com/results?search_query=chilly+cha+cha+dance+practice" }
+        ],
+        songs: [
+          { title: "Chilly Cha Cha - Jessica Jay", url: "https://www.youtube.com/results?search_query=Chilly+Cha+Cha+Jessica+Jay" }
+        ]
+      },
+      tushpush: {
+        name: "Tush Push",
+        tutorials: [
+          { label: "Country Line Dance Lesson", url: "https://www.youtube.com/results?search_query=tush+push+line+dance+tutorial" },
+          { label: "Slow Walkthrough & Practice", url: "https://www.youtube.com/results?search_query=tush+push+slow+walkthrough" }
+        ],
+        songs: [
+          { title: "Chattahoochee - Alan Jackson", url: "https://www.youtube.com/results?search_query=Chattahoochee+Alan+Jackson" },
+          { title: "Bad Jam - Line Dance Mix", url: "https://www.youtube.com/results?search_query=Tush+Push+country+song" }
+        ]
+      },
+      honkytonkstomp: {
+        name: "Honky Tonk Stomp",
+        tutorials: [
+          { label: "Basic Steps & Stomps", url: "https://www.youtube.com/results?search_query=honky+tonk+stomp+line+dance+tutorial" },
+          { label: "Practice Routine", url: "https://www.youtube.com/results?search_query=honky+tonk+stomp+dance+practice" }
+        ],
+        songs: [
+          { title: "Honky Tonk Stomp - Brooks & Dunn", url: "https://www.youtube.com/results?search_query=Honky+Tonk+Stomp+Brooks+and+Dunn" }
+        ]
+      },
+      cherrychacha: {
+        name: "Cherry Cha Cha",
+        tutorials: [
+          { label: "Beginner Steps Tutorial", url: "https://www.youtube.com/results?search_query=cherry+cha+cha+line+dance+tutorial" },
+          { label: "Full Dance Practice", url: "https://www.youtube.com/results?search_query=cherry+cha+cha+line+dance+practice" }
+        ],
+        songs: [
+          { title: "Cherry Pink & Apple Blossom White - Perez Prado", url: "https://www.youtube.com/results?search_query=Cherry+Pink+and+Apple+Blossom+White+Perez+Prado" }
+        ]
+      },
+      jerusalema: {
+        name: "Jerusalema",
+        tutorials: [
+          { label: "Jerusalema Dance Challenge Lesson", url: "https://www.youtube.com/results?search_query=jerusalema+dance+tutorial" },
+          { label: "Slow Count Practice", url: "https://www.youtube.com/results?search_query=jerusalema+slow+steps+tutorial" }
+        ],
+        songs: [
+          { title: "Jerusalema - Master KG ft. Nomcebo", url: "https://www.youtube.com/results?search_query=Jerusalema+Master+KG" }
+        ]
+      }
+    };
+
+    function showStyle(key, element) {
+      const item = danceData[key];
+      if (!item) return;
+
+      if (element) {
+        document.querySelectorAll('.style-item').forEach(el => el.classList.remove('active'));
+        element.classList.add('active');
+      }
+
+      const tbody = document.getElementById('danceTableBody');
+      
+      const tutorialLinksHTML = item.tutorials
+        .map(t => `<a href="${t.url}" target="_blank">▶ ${t.label}</a>`)
+        .join('');
+
+      const songsListHTML = item.songs
+        .map(s => `<li><a href="${s.url}" target="_blank">🎵 ${s.title}</a></li>`)
+        .join('');
+
+      tbody.innerHTML = `
+        <tr>
+          <td>
+            <div class="dance-info">
+              <span class="dance-title">${item.name}</span>
+              <div class="dance-links">
+                ${tutorialLinksHTML}
+              </div>
+            </div>
+          </td>
+          <td>
+            <ul class="song-list">
+              ${songsListHTML}
+            </ul>
+          </td>
+        </tr>
+      `;
+    }
+
+    function filterStyles() {
+      const input = document.getElementById('searchInput');
+      const clearBtn = document.getElementById('clearBtn');
+      const query = input.value.toLowerCase();
+      const items = document.querySelectorAll('.style-item');
+
+      clearBtn.style.display = input.value.length > 0 ? 'block' : 'none';
+
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(query) ? '' : 'none';
+      });
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('searchInput');
+      input.value = '';
+      filterStyles();
+      input.focus();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const firstItem = document.querySelector('.style-item');
+      showStyle('salsa', firstItem);
+    });
+  </script>
+</body>
+</html>
