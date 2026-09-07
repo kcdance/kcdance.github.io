@@ -446,11 +446,11 @@
    <!-- Script add variable at beginning of code to make it available for all function below it.  -->
   <script>
     const sharedLineDanceSongs = [
-      { title: "Girl Just Want to Have Fun 1", url: "https://youtu.be/PIb6AZdTr-A&t=7" },
+      { title: "Girl Just Want to Have Fun", url: "https://youtu.be/PIb6AZdTr-A&t=7" },
       { title: "G.J.W.H.F 2", url: "https://youtu.be/9fiRtYcjhJ4?list=RD9fiRtYcjhJ4" },
       { title: "Go", url: "https://youtu.be/T5PaIFHQpvg?list=RDT5PaIFHQpvg" },
-      { title: "Beat iT - Michael J.", url: "https://youtu.be/YiIUzWfc6NM?list=RDYiIUzWfc6NM" },
-      { title: "Billie Jean - Michael J.", url: "https://youtu.be/QRidtXn0u7k?list=RDQRidtXn0u7k" },
+      { title: "Beat it ", url: "https://youtu.be/YiIUzWfc6NM?list=RDYiIUzWfc6NM" },
+      { title: "Billie Jean ", url: "https://youtu.be/QRidtXn0u7k?list=RDQRidtXn0u7k" },
       { title: "Hate Myself for Loving You", url: "https://youtu.be/QC1cLqhuaZU?list=RDQC1cLqhuaZU" },
       { title: "Sex Bomb", url: "https://youtu.be/WZ32gSLNHfA?list=RDWZ32gSLNHfA" },
       { title: "Iron Horse", url: "https://www.youtube.com/watch?v=gQNfB7t74tY" },
@@ -465,10 +465,10 @@
           { label: "สอน & ซ้อมเต้น", url: "https://youtu.be/3NZzmkxHVRY" }
         ],
         steps: [
-          "Grapevine ไปทางขวา จบที่ touch ด้วยเท้าซ้าย พร้อมตบมือ).",
+          "<strong>Section 1:</strong> Grapevine ไปทางขวา จบที่ touch ด้วยเท้าซ้าย พร้อมตบมือ).",
           "Grapevine ไปทางซ้าย จบที่ touch ด้วยเท้าขวา พร้อมตบมือ).",
           "       ---- ❤️ จบ Section 1 ❤️ --",
-          "ก้าวถอยหลัง 3 steps (ขวา ซ้าย ขวา), touch ด้วยเท้าซ้าย.",
+          "<strong>Section 2:</strong> ก้าวถอยหลัง 3 steps (ขวา ซ้าย ขวา), touch ด้วยเท้าซ้าย.",
           "ก้าวเท้าซ้ายไปข้างหน้า, touch ด้วยเท้าขวา, ถอยเท้าขวามาข้างหลัง, touch ด้วยเท้าซ้าย",
           "       ---- ❤️ จบ Section 2 ❤️ --",
           "ก้าวเท้าซ้ายพร้อมหมุนตัว 90 องศาไปทางซ้าย, ก้าวเท้าขวาตามไป scuff"
@@ -1022,7 +1022,7 @@
         .join('');
 
       const songsListHTML = item.songs
-        .map(s => `<li><a href="${s.url}" target="_blank"><span style="font-size:0.70rem">🎵<span> ${s.title}</a></li>`)
+        .map(s => `<li><a href="${s.url}" target="_blank">🎵 ${s.title}</a></li>`)
         .join('');
 
       tbody.innerHTML = `
@@ -1030,7 +1030,7 @@
           <td>
             <div class="dance-info">
               <span class="dance-title">${item.name}</span>
-              
+
               <div class="dance-links">
                 ${tutorialLinksHTML}
               </div>
@@ -1046,9 +1046,9 @@
           <td colspan="2">
             <div class="instructions-box">
               <strong>BASIC MOVE STEPS:</strong>
-              <ol>
+              <ul>
                 ${stepsListHTML}
-              </ol>
+              </ul>
             </div>
           </td>
         </tr>
