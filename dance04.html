@@ -1065,7 +1065,7 @@
       `;
     }
 
-    /* Insert tag text/emoji into input and filter automatically */
+    /* Insert tag text/emoji into input, filter automatically, and dismiss keyboard */
     function insertTag(tagText) {
       const input = document.getElementById('searchInput');
       input.value = tagText;
@@ -1075,7 +1075,9 @@
       
       // Trigger search filter & focus input
       filterStyles();
-      input.focus();
+      // input.focus();     cut this line since KC only want the tagText, no need to have input.focus() since it will bring onscreen KB up and block webpage
+      // Remove focus to hide the Android on-screen keyboard
+      input.blur();
     }
 
     function filterStyles() {
