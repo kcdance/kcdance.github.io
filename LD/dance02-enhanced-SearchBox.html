@@ -1022,7 +1022,7 @@
         .join('');
 
       const songsListHTML = item.songs
-        .map(s => `<li><a href="${s.url}" target="_blank">🎵 ${s.title}</a></li>`)
+        .map(s => `<li><a href="${s.url}" target="_blank"><span style="font-size:0.70rem">🎵<span> ${s.title}</a></li>`)
         .join('');
 
       tbody.innerHTML = `
@@ -1030,6 +1030,7 @@
           <td>
             <div class="dance-info">
               <span class="dance-title">${item.name}</span>
+              
               <div class="dance-links">
                 ${tutorialLinksHTML}
               </div>
