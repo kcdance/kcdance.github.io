@@ -382,7 +382,10 @@
 <body>
   <!-- Orig. from  D:\kc\2026\kc\lineDance\webpage\test-dance-02-accordian.html  enhance shadow on UI added -->
   <header>
-    <h1>Dance Style Hub</h1>
+    <!-- <h1>Dance Style Hub</h1> -->
+    <!-- <h1>คลิกท่าเต้นที่ชอบ แล้วไปซ้อมกันเลย </h1> -->
+    <!-- <h1>🕺คลิกท่าเต้นที่ชอบ คลิกเพลงที่ใช่ 🎶</h1> -->
+    <h1>🕺Pick Your Dance, Play Your Song! 🎶</h1>
     <div class="search-wrapper">
       <input type="text" id="searchInput" class="search-box" placeholder="Search dance styles..." oninput="filterStyles()" />
       <button id="clearBtn" class="clear-btn" onclick="clearSearch()" aria-label="Clear search">&times;</button>      
@@ -1462,7 +1465,7 @@
         .join('');
 
       const songsListHTML = item.songs
-        .map(s => `<li><a href="${s.url}" target="_blank">🎵 ${s.title}</a></li>`)
+        .map(s => `<li><a href="${s.url}" target="_blank"><sub>🎵</sub> ${s.title}</a></li>`)
         .join('');
 
       tbody.innerHTML = `
