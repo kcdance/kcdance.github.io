@@ -74,6 +74,7 @@
       border-radius: 28px;
       padding: 0.25rem 0.75rem;
       min-height: var(--touch-min-height);
+      box-sizing: border-border-box; /* Ensures padding stays inside the boundary */
     }
 
     .search-wrapper:focus-within {
@@ -106,6 +107,7 @@
     /* Tag Menu */
     .tag-dropdown {
       position: relative;
+      flex-shrink: 0; /* Prevents the tag button from expanding or overflowing */
       user-select: none;
     }
 
@@ -656,9 +658,9 @@
 
       clearBtn.style.display = input.value.length > 0 ? 'inline-flex' : 'none';
 
-      if (query.length > 0) {
-        document.getElementById('accordionWrapper').setAttribute('open', 'true');
-      }
+
+      // Remove or comment out this line to stop mobile layout shifting:
+      // if (query.length > 0) { document.getElementById('accordionWrapper').setAttribute('open', 'true'); }
 
       items.forEach(item => {
         const text = item.textContent.toLowerCase();
