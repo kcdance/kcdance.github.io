@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%231d4ed8%22></rect><path fill=%22%23fff%22 d=%22M59.59 47.63L85.25 79.92Q85.63 80.50 85.63 81.25Q85.63 82.02 85.01 82.63Q84.39 83.25 83.54 83.25L83.54 83.25L59.02 83.25Q56.84 83.25 55.60 81.73L55.60 81.73L39.07 61.30L39.07 80.69Q39.07 81.73 38.31 82.49Q37.55 83.25 36.51 83.25L36.51 83.25L16.94 83.25Q15.89 83.25 15.13 82.49Q14.38 81.73 14.38 80.69L14.38 80.69L14.38 19.31Q14.38 18.27 15.13 17.51Q15.89 16.75 16.94 16.75L16.94 16.75L36.51 16.75Q37.55 16.75 38.31 17.51Q39.07 18.27 39.07 19.31L39.07 19.31L39.07 37.17L54.09 18.36Q55.51 16.75 57.60 16.75L57.60 16.75L80.50 16.75Q81.35 16.75 81.97 17.37Q82.59 17.98 82.59 18.79Q82.59 19.60 82.11 20.17L82.11 20.17L59.59 47.63Z%22></path></svg>" />
+  <title>Line Dance Library - Middle Age Friendly</title>
+  <style>
+    :root {
+      /* Palette: High-Contrast, Calm Navy & Warm Amber Accent Theme */
+      --color-primary: #1d4ed8;       /* Royal Blue - clear contrast */
+      --color-primary-dark: #1e3a8a;  /* Deep Navy */
+      --color-accent: #f59e0b;       /* Soft Amber Accent */
+      --color-accent-light: #fef3c7; /* Light Warm Yellow background */
+      --color-text-dark: #0f172a;    /* High contrast near-black text */
+      --color-text-subtle: #475569;  /* Muted grey-blue text */
+      
+      --bg-color: #f1f5f9;
+      --card-bg: #ffffff;
+      --border-color: #cbd5e1;
+      --shadow-soft: 0 4px 14px rgba(15, 23, 42, 0.08);
+
+      /* Touch & Fluid Sizing Defaults */
+      --touch-min-height: 48px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--color-text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: 1.125rem; /* 18px base for optimal legibility */
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 1.25rem 1rem;
+      background-color: var(--card-bg);
+      border-bottom: 3px solid var(--color-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    header h1 {
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      text-align: center;
+    }
+
+    /* Search Bar Container */
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 550px;
+      display: flex;
+      align-items: center;
+      background-color: #ffffff;
+      border: 2px solid var(--color-primary);
+      border-radius: 28px;
+      padding: 0.25rem 0.75rem;
+      min-height: var(--touch-min-height);
+    }
+
+    .search-wrapper:focus-within {
+      box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.25);
+    }
+
+    .search-box {
+      flex: 1;
+      padding: 0.6rem 0.5rem;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--color-text-dark);
+      font-size: 1.1rem;
+    }
+
+    .clear-btn {
+      background: none;
+      border: none;
+      color: var(--color-text-subtle);
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+      min-width: 44px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Tag Menu */
+    .tag-dropdown {
+      position: relative;
+      user-select: none;
+    }
+
+    .tag-dropdown summary {
+      list-style: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      background-color: #e2e8f0;
+      color: var(--color-primary-dark);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-height: 40px;
+    }
+
+    .tag-dropdown summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .tag-dropdown summary::after {
+      content: '▾';
+      font-size: 0.9rem;
+    }
+
+    .tag-menu {
+      position: absolute;
+      top: 125%;
+      right: 0;
+      background-color: #ffffff;
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      padding: 0.75rem;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 0.5rem;
+      width: 210px;
+      z-index: 100;
+    }
+
+    .tag-option {
+      background-color: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.6rem 0.75rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--color-text-dark);
+      cursor: pointer;
+      text-align: left;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .tag-option:hover {
+      background-color: var(--color-accent-light);
+    }
+
+    /* Main Grid Layout */
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      padding: 1.25rem;
+      flex: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    @media (min-width: 850px) {
+      .container {
+        grid-template-columns: 300px 1fr;
+        padding: 1.5rem;
+      }
+    }
+
+    .panel {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-soft);
+      padding: 1.25rem;
+    }
+
+    .panel h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      margin-bottom: 0.75rem;
+      border-bottom: 3px solid var(--color-accent);
+      padding-bottom: 0.4rem;
+    }
+
+    /* Accordion & Style Selector */
+    .mobile-accordion summary {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--color-primary-dark);
+      cursor: pointer;
+      padding: 0.75rem 1rem;
+      background-color: #e2e8f0;
+      border-radius: 8px;
+      user-select: none;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: var(--touch-min-height);
+    }
+
+    .mobile-accordion summary::after {
+      content: '▼';
+      font-size: 0.9rem;
+      color: var(--color-primary-dark);
+      transition: transform 0.2s ease;
+    }
+
+    .mobile-accordion[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .style-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 0.75rem;
+    }
+
+    .style-item {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #f8fafc;
+      color: var(--color-text-dark);
+      font-size: 1.05rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      border: 1.5px solid var(--border-color);
+      min-height: var(--touch-min-height);
+      display: flex;
+      align-items: center;
+    }
+
+    .style-item:hover {
+      background-color: var(--color-accent-light);
+      border-color: var(--color-accent);
+    }
+
+    .style-item.active {
+      background-color: var(--color-primary);
+      color: #ffffff;
+      border-color: var(--color-primary-dark);
+    }
+
+    /* Right Panel: Content Display */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 0.85rem 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--color-primary-dark);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+    }
+
+    .dance-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .dance-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+    }
+
+    .dance-links a {
+      color: var(--color-text-dark);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      margin-right: 0.5rem;
+      margin-bottom: 0.4rem;
+      padding: 0.5rem 0.85rem;
+      background-color: var(--color-accent-light);
+      border: 1px solid var(--color-accent);
+      border-radius: 8px;
+      min-height: 44px;
+    }
+
+    .dance-links a:hover {
+      background-color: var(--color-accent);
+      color: #000;
+    }
+
+    .song-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .song-list a {
+      color: var(--color-primary);
+      text-decoration: underline;
+      font-size: 1.05rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.5rem;
+      border-radius: 6px;
+      min-height: 44px;
+    }
+
+    .song-list a:hover {
+      background-color: #e2e8f0;
+    }
+
+    /* Instructions Box */
+    .instructions-box {
+      padding: 1rem;
+      background-color: #f8fafc;
+      border-left: 5px solid var(--color-primary);
+      border-radius: 8px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--color-text-dark);
+      margin-top: 0.5rem;
+    }
+
+    .instructions-box strong.title {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary-dark);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .instructions-box ol {
+      padding-left: 1.25rem;
+    }
+
+    .instructions-box li {
+      margin-bottom: 0.85rem;
+    }
+
+    .step-section {
+      margin-bottom: 0.85rem;
+    }
+
+    .step-section strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--color-primary);
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Line Dance Library</h1>
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" class="search-box" placeholder="Search dance styles..." oninput="filterStyles()" aria-label="Search dance styles" />
+      <button id="clearBtn" class="clear-btn" onclick="clearSearch()" aria-label="Clear search">&times;</button>
+      <details class="tag-dropdown" id="tagMenuWrapper">
+        <summary title="Quick Tags">🏷️ Tags</summary>
+        <div class="tag-menu">
+          <button class="tag-option" onclick="insertTag('🔰')">🔰 Basic</button>
+          <button class="tag-option" onclick="insertTag('💃')">💃 Latin</button>
+          <button class="tag-option" onclick="insertTag('🐴')">🐴 Southern Soul</button>
+          <button class="tag-option" onclick="insertTag('🤠')">🤠 Country-Western</button>
+          <button class="tag-option" onclick="insertTag('🎸')">🎸 Modern Inter</button>
+          <button class="tag-option" onclick="insertTag('💜')">💜 Soul Urban R&B</button>
+          <button class="tag-option" onclick="insertTag('🥳')">🥳 Pop/Party</button>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Left Panel: Style Selector -->
+    <div class="panel">
+      <h2>Select Style</h2>
+      <details class="mobile-accordion" id="accordionWrapper" open>
+        <summary>Style: <span id="currentStyleLabel" style="font-weight: 700; color: var(--color-primary);">Cry to Me</span></summary>
+        <ul class="style-list" id="styleList">
+          <li class="style-item" onclick="showStyle('cheyenne', this)">🤠 Cheyenne</li>
+          <li class="style-item" onclick="showStyle('handsup', this)">🎸 Hands Up</li>
+          <li class="style-item" onclick="showStyle('jerusalema', this)">🎸 Jerusalema</li>
+          <li class="style-item" onclick="showStyle('cowboyboogie', this)">🔰💜 Cowboy Boogie</li>
+          <li class="style-item" onclick="showStyle('chillychacha', this)">💃 Chilly Cha Cha</li>
+          <li class="style-item active" onclick="showStyle('crytome', this)">Cry to Me</li>
+        </ul>
+      </details>
+    </div>
+
+    <!-- Right Panel: Practice Videos & Music -->
+    <div class="panel">
+      <h2>Tutorials & Music</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 50%;">STYLE & TUTORIALS</th>
+              <th style="width: 50%;">RECOMMENDED SONGS</th>
+            </tr>
+          </thead>
+          <tbody id="danceTableBody">
+            <!-- Dynamic Content loaded via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const sharedLineDanceSongs = [
+      { title: "Girl Just Want to Have Fun", url: "https://youtu.be/PIb6AZdTr-A&t=7" },
+      { title: "Go", url: "https://youtu.be/T5PaIFHQpvg?list=RDT5PaIFHQpvg" },
+      { title: "Beat it ", url: "https://youtu.be/YiIUzWfc6NM?list=RDYiIUzWfc6NM" },
+      { title: "Billie Jean ", url: "https://youtu.be/QRidtXn0u7k?list=RDQRidtXn0u7k" },
+      { title: "Hate Myself for Loving You", url: "https://youtu.be/QC1cLqhuaZU?list=RDQC1cLqhuaZU" },
+      { title: "Sex Bomb", url: "https://youtu.be/WZ32gSLNHfA?list=RDWZ32gSLNHfA" },
+      { title: "Iron Horse", url: "https://www.youtube.com/watch?v=gQNfB7t74tY" },
+      { title: "Can't Take My Eyes Off You", url: "https://youtu.be/BT4GIljqr-A" },
+    ];    
+    const danceData = {
+      cowboyboogie: {
+        name: "Cowboy Boogie",
+        tutorials: [
+          { label: "สอน & ซ้อมเต้น", url: "https://youtu.be/nMlP6XGPEno" }
+        ],
+        steps: [
+          "Side Walks (Right & Left) with Touches",
+          "Side Touches, Front Kick, & Double Stomps",
+          "Forward Shuffles & Half-Pivot Turnarounds",
+          "The Hip Boogie & Turning Jazz Box"
+        ],
+        songs: sharedLineDanceSongs
+      },
+      cheyenne: {
+        name: "Cheyenne",
+        tutorials: [
+          { label: "สอน & ซ้อมเต้น", url: "https://youtu.be/XCcDv4uEGo0" }
+        ],
+        steps: [
+          "<div class='step-section'><strong>[Counts 1-8] Grapevine Right & Grapevine Left</strong>" +
+          "1-4: Step R to side, step L behind R, step R to side, touch L beside R<br>" +
+          "5-8: Step L to side, step R behind L, step L to side, touch R beside L</div>",
+
+          "<div class='step-section'><strong>[Counts 9-16] Forward Walk with Kick & Back Walk with Touch</strong>" +
+          "1-3: Walk forward R, L, R<br>" +
+          "4: Kick L forward & clap<br>" +
+          "5-7: Walk back L, R, L<br>" +
+          "8: Touch R beside L</div>"
+        ],
+        songs: [
+          { title: "ขอให้เหมือนเดิม", url: "https://youtu.be/n8ueKBAXi94?si=b9ybl3GClxyCt8R9" },
+          { title: "I Feel Lucky", url: "https://youtu.be/FHNwEV3cMZw?list=RDFHNwEV3cMZw" }
+        ]      
+      },
+      handsup: {
+        name: "Hands Up",
+        tutorials: [
+          { label: "สอน", url: "https://youtu.be/AlQPduSp9Rg" },
+          { label: "ซ้อมเต้น", url: "https://youtu.be/VS7gIAiPt3E" }
+        ],
+        steps: [
+          "<div class='step-section'><strong>[Counts 1-8] Out-Out Forward, In-In Back & Hip Swivels</strong>" +
+          "1-2: Step R forward diagonal, step L forward diagonal<br>" +
+          "3-4: Step R back to center, step L beside R<br>" +
+          "5-8: Roll hips in a circle R to L twice</div>",
+
+          "<div class='step-section'><strong>[Counts 9-16] Forward Shuffle, ½ Pivot Turn & Forward Shuffle, ½ Pivot Turn</strong>" +
+          "1&2: Forward shuffle (R-L-R)<br>" +
+          "3-4: Step L forward, pivot ½ turn right<br>" +
+          "5&6: Forward shuffle (L-R-L)<br>" +
+          "7-8: Step R forward, pivot ½ turn left</div>"
+        ],
+        songs: [
+          { title: "Hands Up", url: "https://youtu.be/YTBM7oBEO6k?list=RDYTBM7oBEO6k" }
+        ]      
+      },
+      chillychacha: {
+        name: "Chilly Cha Cha",
+        tutorials: [
+          { label: "สอน", url: "https://youtu.be/Ox4rQXsQXPs" },
+          { label: "ซ้อมเต้น", url: "https://youtu.be/nUOMU__3RQ0" }
+        ],
+        steps: [
+          "<div class='step-section'><strong>[Counts 1-8] Side Steps & Side Cha-Chas</strong>" +
+          "1-2: Step R to right side, step L beside R<br>" +
+          "3&4: Side cha-cha right (R-L-R)<br>" +
+          "5-6: Step L to left side, step R beside L<br>" +
+          "7&8: Side cha-cha left (L-R-L)</div>",
+      
+          "<div class='step-section'><strong>[Counts 9-16] Forward/Back Rocks & Cha-Chas</strong>" +
+          "1-2: Rock forward R, recover L<br>" +
+          "3&4: Back cha-cha (R-L-R)<br>" +
+          "5-6: Rock back L, recover R<br>" +
+          "7&8: Forward cha-cha (L-R-L)</div>"
+        ],
+        songs: [
+          { title: "Chilly Cha Cha - Jessica Jay", url: "https://youtu.be/1uwTExhWv-M?list=RD1uwTExhWv-M" },
+          { title: "Chilly Cha Cha - search Youtube", url: "https://www.youtube.com/results?search_query=Chilly+Cha+Cha+Jessica+Jay" }
+        ]
+      },
+      jerusalema: {
+        name: "Jerusalema",
+        tutorials: [
+          { label: "สอน", url: "https://youtu.be/Ktvq0hG7ATo" },
+          { label: "ซ้อมเต้น", url: "https://youtu.be/OUnivK_62QA" }
+        ],
+        steps: [
+          "<div class='step-section'><strong>[Counts 1-8] Stomp Left & Right with Heel Bounces</strong>" +
+          "1-4&: Stomp L forward diagonal, bounce heel 3 times, ball-step L beside R<br>" +
+          "5-8&: Stomp R forward diagonal, bounce heel 3 times, ball-step R beside L</div>",
+
+          "<div class='step-section'><strong>[Counts 9-16] Heel Switches & ¼ Turn Left Side Walk</strong>" +
+          "1&2&3&4&: Heel switches L, R, L, R<br>" +
+          "5-8: Turn ¼ left crossing L over R, step R side, cross L over R, step R side</div>"
+        ],
+        songs: [
+          { title: "Jerusalema", url: "https://youtu.be/vqxeMMAgatw" }
+        ]
+      },
+      crytome: {
+        name: "Cry to Me",
+        tutorials: [
+          { label: "สอน & ซ้อมเต้น", url: "https://youtu.be/xyz123" }
+        ],
+        steps: [
+          "<div class='step-section'><strong>[Counts 1-8] Side, Together, Forward Shuffle, Rock & ½ Turn Shuffle</strong>" +
+          "1-2: Step R side, step L beside R<br>" +
+          "3&4: Forward shuffle (R-L-R)<br>" +
+          "5-6: Rock forward L, recover R<br>" +
+          "7&8: ½ turn left shuffle forward (L-R-L)</div>",
+          "<div class='step-section'><strong>[Counts 9-16] Side, Together, Forward Shuffle, Rock & ¼ Turn Chasse</strong>" +
+          "1-2: Step R side, step L beside R<br>" +
+          "3&4: Forward shuffle (R-L-R)<br>" +
+          "5-6: Rock forward L, recover R<br>" +
+          "7&8: ¼ turn left side chasse (L-R-L)</div>"
+        ],
+        songs: [
+          { title: "Cry to Me - Solomon Burke", url: "https://www.youtube.com/results?search_query=Cry+to+Me+Solomon+Burke" },
+          { title: "Cry to Me - Ronnie Beard ***", url: "https://www.youtube.com/results?search_query=Cry+to+Me+Ronnie+Beard" }
+        ]
+      }
+    };
+
+    function showStyle(key, element) {
+      const item = danceData[key];
+      if (!item) return;
+
+      if (element) {
+        document.querySelectorAll('.style-item').forEach(el => el.classList.remove('active'));
+        element.classList.add('active');
+      }
+
+      document.getElementById('currentStyleLabel').textContent = item.name;
+
+      if (window.innerWidth < 850) {
+        document.getElementById('accordionWrapper').removeAttribute('open');
+      }
+
+      const tbody = document.getElementById('danceTableBody');
+      
+      const tutorialLinksHTML = item.tutorials
+        .map(t => `<a href="${t.url}" target="_blank">▶ ${t.label}</a>`)
+        .join('');
+
+      const stepsListHTML = item.steps
+        .map(step => `<li>${step}</li>`)
+        .join('');
+
+      const songsListHTML = item.songs
+        .map(s => `<li><a href="${s.url}" target="_blank">🎵 ${s.title}</a></li>`)
+        .join('');
+
+      tbody.innerHTML = `
+        <tr>
+          <td>
+            <div class="dance-info">
+              <span class="dance-title">${item.name}</span>
+              <div class="dance-links">
+                ${tutorialLinksHTML}
+              </div>
+            </div>
+          </td>
+          <td>
+            <ul class="song-list">
+              ${songsListHTML}
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <div class="instructions-box">
+              <strong class="title">BASIC MOVE STEPS:</strong>
+              <ol>
+                ${stepsListHTML}
+              </ol>
+            </div>
+          </td>
+        </tr>
+      `;
+    }
+
+    function insertTag(tagText) {
+      const input = document.getElementById('searchInput');
+      input.value = tagText;
+      document.getElementById('tagMenuWrapper').removeAttribute('open');
+      filterStyles();
+      input.blur();
+    }
+
+    function filterStyles() {
+      const input = document.getElementById('searchInput');
+      const clearBtn = document.getElementById('clearBtn');
+      const query = input.value.toLowerCase();
+      const items = document.querySelectorAll('.style-item');
+
+      clearBtn.style.display = input.value.length > 0 ? 'inline-flex' : 'none';
+
+      if (query.length > 0) {
+        document.getElementById('accordionWrapper').setAttribute('open', 'true');
+      }
+
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(query) ? 'flex' : 'none';
+      });
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('searchInput');
+      input.value = '';
+      filterStyles();
+      input.focus();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const activeItem = document.querySelector('.style-item.active') || document.querySelector('.style-item');
+      showStyle('crytome', activeItem);
+    });
+  </script>
+</body>
+</html>
