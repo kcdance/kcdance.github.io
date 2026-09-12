@@ -65,14 +65,14 @@
     /* Search Bar Container */
     .search-wrapper {
       position: relative;
-      width: 100%;
+      width: 75%; /* Reduced from 100% to 75% for smartphones */
       max-width: 550px;
       display: flex;
       align-items: center;
       background-color: #ffffff;
       border: 2px solid var(--color-primary);
       border-radius: 28px;
-      padding: 0.25rem 0.75rem;
+      padding: 0.25rem 0.5rem 0.25rem 0.75rem;
       min-height: var(--touch-min-height);
       box-sizing: border-border-box; /* Ensures padding stays inside the boundary */
     }
@@ -81,14 +81,16 @@
       box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.25);
     }
 
+    /* 2. Lock input field so buttons don't push it out of bounds */
     .search-box {
-      flex: 1;
-      padding: 0.6rem 0.5rem;
+      flex: 1 1 auto;
+      min-width: 0; /* Prevents text overflow from expanding flex items */
+      padding: 0.6rem 0.25rem;
       border: none;
       outline: none;
       background: transparent;
       color: var(--color-text-dark);
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
 
     .clear-btn {
@@ -103,11 +105,11 @@
       align-items: center;
       justify-content: center;
     }
-
+    /* 3. Prevent Quick Tags button from shrinking or overflowing */
     /* Tag Menu */
     .tag-dropdown {
       position: relative;
-      flex-shrink: 0; /* Prevents the tag button from expanding or overflowing */
+      flex-shrink: 0; /* Ensures the tag button never expands off-screen */
       user-select: none;
     }
 
@@ -147,7 +149,7 @@
       display: grid;
       grid-template-columns: repeat(1, 1fr);
       gap: 0.5rem;
-      width: 210px;
+      width: 200px;
       z-index: 100;
     }
 
