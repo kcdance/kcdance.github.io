@@ -450,7 +450,7 @@
   <div class="search-wrapper">
     <!-- Style Selection Dropdown inside Search Bar -->
     <details class="style-dropdown" id="styleDropdownWrapper">
-      <summary id="currentStyleLabel">Jerusalema</summary>
+      <summary id="currentStyleLabel">Electric Slide</summary>
       <ul class="style-menu" id="styleList">
         <li class="style-item" onclick="showStyle('cheyenne', this)">🤠 Cheyenne</li>
         <li class="style-item" onclick="showStyle('achybreakyheart', this)">🤠 Achy Breaky Heart</li>
@@ -477,7 +477,7 @@
         <li class="style-item" onclick="showStyle('sexbombk', this)">🥳 Sex Bomb Korean Version</li>
         <li class="style-item" onclick="showStyle('sexbombr', this)">🥳 Sex Bomb Rose Beth Version</li>
         <li class="style-item" onclick="showStyle('hillbillyrockhillbillyroll', this)">🥳 Hillbilly Rock Hillbilly Roll</li>
-        <li class="style-item" onclick="showStyle('electricslide', this)">🔰💜 Electric Slide</li>
+        <li class="style-item active" onclick="showStyle('electricslide', this)">🔰💜 Electric Slide</li>
         <li class="style-item" onclick="showStyle('bartenderstomp', this)">🔰🐴 Bartender Stomp</li>
         <li class="style-item" onclick="showStyle('cowboymadison', this)">🔰🤠 Cowboy Madison</li>
         <li class="style-item" onclick="showStyle('cowboyboogie', this)">🔰💜 Cowboy Boogie</li>
@@ -485,8 +485,8 @@
         <li class="style-item" onclick="showStyle('afterfivestomp', this)">🔰🐴 After Five Stomp</li>
         <li class="style-item" onclick="showStyle('straycatstrut', this)">🔰🥳 Stray Cat Strut</li>
         <li class="style-item" onclick="showStyle('lemadison', this)">Le Madison</li>
-        <li class="style-item active" onclick="showStyle('salsa', this)">Salsa</li>
-        <li class="style-item active" onclick="showStyle('crytome', this)">Cry to Me</li>
+        <li class="style-item" onclick="showStyle('salsa', this)">Salsa</li>
+        <li class="style-item" onclick="showStyle('crytome', this)">Cry to Me</li>
       </ul>
     </details>
 
@@ -772,7 +772,7 @@
       achybreakyheart: {
         name: "Achy Breaky Heart",
         tutorials: [
-          { label: "สอน & ซ้อมเต้น", url: "https://youtu.be/IJoIaYUrJdk" }
+          { label: "สอน & ซ้อมเต้น", url: "https://www.youtube.com/watch?v=IJoIaYUrJdk&t=4s" }
         ],
         steps: [
           "<div class='step-section'><strong>[Counts 1-8] Vine Right, Touch & Vine Left ¼ Turn, Scuff</strong>" +
@@ -836,7 +836,7 @@
       cottonfield: {
         name: "Cotton Field",
         tutorials: [
-          { label: "สอน & ซ้อมเต้น", url: "https://youtu.be/PKBcqCPwLrU" }
+          { label: "สอน & ซ้อมเต้น", url: "https://youtu.be/PKBcqCPwLrU?t=3s" }
         ],
         steps: [
           "<div class='step-section'><strong>[Counts 1-8] Right Chasse, Back Rock & Left Chasse, Back Rock</strong>" +
@@ -870,7 +870,7 @@
       cheyenne: {
         name: "Cheyenne",
         tutorials: [
-          { label: "สอน & ซ้อมเต้น", url: "https://youtu.be/XCcDv4uEGo0" }
+          { label: "สอน & ซ้อมเต้น", url: "https://www.youtube.com/watch?v=XCcDv4uEGo0&t=3s" }
         ],
         steps: [
           "<div class='step-section'><strong>[Counts 1-8] Grapevine Right & Grapevine Left</strong>" +
@@ -1467,7 +1467,7 @@
       crytome: {
         name: "Cry to Me",
         tutorials: [
-          { label: "สอน & ซ้อมเต้น", url: "https://youtu.be/xyz123" }
+          { label: "สอน & ซ้อมเต้น", url: "https://youtu.be/aKbPMjJQYSA?t=9" }
         ],
       steps: [
         "<div class='step-section'><strong>[Counts 1-8] Side, Together, Forward Shuffle, Rock & ½ Turn Shuffle</strong>" +
@@ -1605,7 +1605,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       const activeItem = document.querySelector('.style-item.active') || document.querySelector('.style-item');
-      showStyle('crytome', activeItem);
+      showStyle('electricslide', activeItem);
     });
   </script>
 </body>
