@@ -198,6 +198,11 @@
       gap: 0.5rem;
       width: 230px;
       z-index: 100;
+
+      /* Enable smooth scrolling */
+      max-height: 220px;           /* Sets the height limit */
+      overflow-y: auto;            /* Shows vertical scrollbar when needed */
+      -webkit-overflow-scrolling: touch; /* Ensures smooth touch scrolling on iOS */
     }
 
     .tag-option {
