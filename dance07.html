@@ -1591,11 +1591,39 @@
       });      
     }
 
+    // mod 2026-09-14  9:00 pm KC's request if tag-menu get pick, pick first result, then show filter results
     function insertTag(tagText) {
       const input = document.getElementById('searchInput');
+      
+      // 1. Set search input value
       input.value = tagText;
-      document.getElementById('tagMenuWrapper').removeAttribute('open');
+    
+      // 2. Close the Tag Menu
+      const tagMenuWrapper = document.getElementById('tagMenuWrapper');
+      if (tagMenuWrapper) {
+        tagMenuWrapper.removeAttribute('open');
+      }
+    
+      // 3. Filter styles based on selected tag
       filterStyles();
+    
+      // 4. Auto-expand the Style Menu dropdown
+      const styleDropdown = document.getElementById('styleDropdownWrapper');
+      if (styleDropdown) {
+        styleDropdown.setAttribute('open', 'true');
+      }
+    
+      // 5. Find and automatically select the first visible style option
+      const firstVisibleStyle = document.querySelector('.style-item[style*="display: flex"], .style-item:not([style*="display: none"])');
+      if (firstVisibleStyle) {
+        // Extracts the key or clicks the first visible option directly, this will close tag-menu I think
+        firstVisibleStyle.click();
+      }
+      // 6. kc did this , to reopen tag-menu..  open the style dropdown to show the filtered results
+      if (styleDropdown) {
+        styleDropdown.setAttribute('open', 'true');
+      }
+      // 7. Remove focus from the search input to prevent mobile keyboard from staying open
       input.blur();
     }
 
