@@ -1635,8 +1635,9 @@
     
       clearBtn.style.display = input.value.length > 0 ? 'inline-flex' : 'none';
     
-      // Remove or comment out this line to stop mobile layout shifting:
-      // if (query.length > 0) { document.getElementById('accordionWrapper').setAttribute('open', 'true'); }
+      // accordianWrapper was removed when kc put the style-box inside the search-box now we have styleDropdownWrapper instead:
+      if (query.length > 0) { document.getElementById('styleDropdownWrapper').setAttribute('open', 'true'); }
+
     
       items.forEach(item => {
         const text = item.textContent.toLowerCase();
